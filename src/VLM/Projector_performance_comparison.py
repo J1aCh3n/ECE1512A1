@@ -19,8 +19,8 @@ transform = transforms.Compose([
     transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))
 ])
 
-train_dataset = Subset(datasets.CIFAR10(root="./data", train=True, transform=transform, download=True), range(200))
-test_dataset  = Subset(datasets.CIFAR10(root="./data", train=False, transform=transform, download=True), range(20))
+train_dataset = Subset(datasets.CIFAR10(root="./data", train=True, transform=transform, download=True), range(600))
+test_dataset  = Subset(datasets.CIFAR10(root="./data", train=False, transform=transform, download=True), range(60))
 
 train_loader = DataLoader(train_dataset, batch_size=4, shuffle=False)
 test_loader  = DataLoader(test_dataset,  batch_size=4, shuffle=False)
