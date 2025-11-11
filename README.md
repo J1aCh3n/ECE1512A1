@@ -2,6 +2,34 @@
 Yutian Mei yt.mei@mail.utoronto.ca
 Jiachen Rao jc.rao@mail.utoronto.ca
 
+# VMamba (SS2D) – ImageNet-val Experiments
+
+Simple, compute-friendly experiments for **VMamba** and ablations (4-dir vs 2-dir SS2D), plus a Vim comparison outline. Focus: small-data protocols with limited compute power.
+
+## Overview
+- **Backbone:** VMamba (VSS block with SS2D).
+- **Dataset:** ImageNet **validation** split only (1000×50 imgs). We use:
+  - 80% train / 20% val split (from val).
+  - Optional class downsample to **20 classes** for quick runs.
+- **Pretrained:** strip classifier head to change `NUM_CLASSES` (see `scripts/strip_head.py`).
+- **Note (kernel fallback):** `v05` (4-dir cross2d) requires `selective_scan_cuda_oflex`. Without it, the code falls back to a non-oflex path that behaves like **2-dir**; thus `v05` ≈ `v052d` in accuracy/throughput on machines without oflex.
+
+## Environment
+- Python 3.10+, PyTorch ≥ 2.1.
+- Clone upstream (or this fork):
+  ```bash
+  git clone https://github.com/MzeroMiko/VMamba
+  cd VMamba
+  conda create -n vmamba python=3.10
+  pip install torch==2.2 torchvision torchaudio triton pytest chardet yacs termcolor fvcore seaborn packaging ninja einops numpy==1.24.4 timm==0.4.12
+  pip install https://github.com/state-spaces/mamba/releases/download/v2.2.4/mamba_ssm-2.2.4+cu12torch2.2cxx11abiTRUE-cp310-cp310-linux_x86_64.whl
+  pip install https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.2.0.post2/causal_conv1d-1.2.0.post2+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+  pip install https://github.com/state-spaces/mamba/releases/download/v1.2.0.post1/mamba_ssm-1.2.0.post1+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
+  python vmamba.py
+
+
+
+
 ## LLaVA Projector Optimization: Efficiency and Expressiveness Study
 
 This part of the repository contains the experimental code and analysis for a course project based on **[LLaVA: Visual Instruction Tuning (Liu et al., 2023)](https://arxiv.org/abs/2304.08485)**.  
