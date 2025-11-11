@@ -2,11 +2,11 @@
 Yutian Mei yt.mei@mail.utoronto.ca
 Jiachen Rao jc.rao@mail.utoronto.ca
 
-# VMamba (SS2D) – ImageNet-val Experiments
+## VMamba (SS2D) – ImageNet-val Experiments
 
 Simple, compute-friendly experiments for **VMamba** and ablations (4-dir vs 2-dir SS2D), plus a Vim comparison outline. Focus: small-data protocols with limited compute power.
 
-## Overview
+### Overview
 - **Backbone:** VMamba (VSS block with SS2D).
 - **Dataset:** ImageNet **validation** split only (1000×50 imgs). We use:
   - 80% train / 20% val split (from val).
@@ -14,7 +14,7 @@ Simple, compute-friendly experiments for **VMamba** and ablations (4-dir vs 2-di
 - **Pretrained:** strip classifier head to change `NUM_CLASSES` (see `scripts/strip_head.py`).
 - **Note (kernel fallback):** `v05` (4-dir cross2d) requires `selective_scan_cuda_oflex`. Without it, the code falls back to a non-oflex path that behaves like **2-dir**; thus `v05` ≈ `v052d` in accuracy/throughput on machines without oflex.
 
-## Environment
+### Environment
 - Python 3.10+, PyTorch ≥ 2.1.
 - Clone upstream (or this fork):
   ```bash
@@ -26,9 +26,6 @@ Simple, compute-friendly experiments for **VMamba** and ablations (4-dir vs 2-di
   pip install https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.2.0.post2/causal_conv1d-1.2.0.post2+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
   pip install https://github.com/state-spaces/mamba/releases/download/v1.2.0.post1/mamba_ssm-1.2.0.post1+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
   python vmamba.py
-
-
-
 
 ## LLaVA Projector Optimization: Efficiency and Expressiveness Study
 
