@@ -2,17 +2,35 @@
 Yutian Mei yt.mei@mail.utoronto.ca
 Jiachen Rao jc.rao@mail.utoronto.ca
 
-## VMamba (SS2D) – ImageNet-val Experiments
+# VMamba (SS2D) – Lightweight Experiments on ImageNet (val-only)
 
-Simple, compute-friendly experiments for **VMamba** and ablations (4-dir vs 2-dir SS2D), plus a Vim comparison outline. Focus: small-data protocols with limited compute power.
+This repo accompanies our course paper on extending **Mamba** to vision via **VMamba (SS2D)** and (theoretically) **Vim**. We focus on **accuracy/efficiency** under tight compute by training small VMamba variants on a **reduced ImageNet (ILSVRC2012) validation set**.
 
-### Overview
-- **Backbone:** VMamba (VSS block with SS2D).
-- **Dataset:** ImageNet **validation** split only (1000×50 imgs). We use:
-  - 80% train / 20% val split (from val).
-  - Optional class downsample to **20 classes** for quick runs.
-- **Pretrained:** strip classifier head to change `NUM_CLASSES` (see `scripts/strip_head.py`).
-- **Note (kernel fallback):** `v05` (4-dir cross2d) requires `selective_scan_cuda_oflex`. Without it, the code falls back to a non-oflex path that behaves like **2-dir**; thus `v05` ≈ `v052d` in accuracy/throughput on machines without oflex.
+---
+
+## What’s inside
+- **Paper outline**: Motivation, related work, how Mamba is extended by VMamba (SS2D) and Vim (bi-scan + pos. enc.), plus proposed experimental setups.
+- **Experiments (run)**: VMamba **4-dir SS2D** vs **2-dir** ablation on ImageNet-val-only (20 classes).  
+- **Experiments (theory-only)**: Vim variants and ablations (no runs due to compute).
+
+---
+
+## Dataset protocol (small & reproducible)
+- Source: **ImageNet (ILSVRC2012) validation** set only.  
+- Split: **80% train / 20% val** (within val).  
+- Class reduction: **1,000 → 20 classes** (subset) to cut compute.  
+- Pretrained compatibility: we **strip the classifier head** via `strip_head.py` so `NUM_CLASSES` can differ from the checkpoint.
+
+> Note on 4-dir vs 2-dir: In the official VMamba repo, `v05` (4-dir cross2d) depends on the `selective_scan_cuda_oflex` kernel. Without it, the code falls back to a non-oflex path that behaves like **2-dir**. On our setup (CUDA / selective-scan mismatch), `v05` ≈ `v052d` → **same accuracy, similar throughput**.
+
+---
+
+## Models
+https://drive.google.com/drive/folders/1Btr66YbMwRaDLI21aIcszdBz0Hg2MoQE?usp=sharing
+- **From scratch**: VMamba-Tiny **4-dir SS2D** and **2-dir** ablation.
+- **Fine-tune**: Pretrained backbone **with stripped head**, resized inputs.
+
+---
 
 ### Environment
 - Python 3.10+, PyTorch ≥ 2.1.
@@ -26,6 +44,19 @@ Simple, compute-friendly experiments for **VMamba** and ablations (4-dir vs 2-di
   pip install https://github.com/Dao-AILab/causal-conv1d/releases/download/v1.2.0.post2/causal_conv1d-1.2.0.post2+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
   pip install https://github.com/state-spaces/mamba/releases/download/v1.2.0.post1/mamba_ssm-1.2.0.post1+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
   python vmamba.py
+
+
+### result summary
+
+| Model                 | Dirs | ImgSize | Top-1 | Top-5 | img/s |
+| --------------------- | :--: | :-----: | ----: | ----: | ----: |
+| VMamba-Tiny (scratch) |   4  |   224  |  27.00 |  64.50 |  158.5 |
+| VMamba-Tiny (scratch) |   2  |   224  |  27.00 |  64.50 |  160.3 |
+| VMamba-Tiny (ft, pre) |   4  |   224  |  99.50 |  99.50 |  169.5 |
+| VMamba-Tiny (ft, pre) |   4  |   128  |  92.50 |  97.50 |  338.3 |
+| VMamba-Tiny (ft, pre) |   4  |    64  |  74.00 |  95.00 |  381.6 |
+
+
 
 ## LLaVA Projector Optimization: Efficiency and Expressiveness Study
 
