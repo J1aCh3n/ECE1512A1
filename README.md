@@ -1,4 +1,6 @@
-# ECE1512A1
+# ECE1512 - Project A (SSM and VLM)
+Yutian Mei yt.mei@mail.utoronto.ca
+Jiachen Rao jc.rao@mail.utoronto.ca
 
 ## LLaVA Projector Optimization: Efficiency and Expressiveness Study
 
