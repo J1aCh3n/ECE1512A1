@@ -111,3 +111,15 @@ LoRA       |     0.1874 |       1.07 |       1.57 |      12.74
 - The **LowRank** variant offers an excellent trade-off between parameter efficiency and accuracy.  
 - **LLaVA-NeXT (2024)** adopted a **two-layer MLP projector**, consistent with our experimental findings.
 
+### Environment
+
+This part of the project was developed and tested in the following environment:
+
+- **Python:** 3.10  
+- **PyTorch:** 2.2+  
+- **CUDA:** 12.1  
+- **Transformers:** 4.41+  
+- **Torchvision:** 0.17+  
+- **Matplotlib:** 3.8+  
+- **Tqdm:** 4.66+  
+
