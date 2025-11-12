@@ -45,6 +45,12 @@ https://drive.google.com/drive/folders/1Btr66YbMwRaDLI21aIcszdBz0Hg2MoQE?usp=sha
   pip install https://github.com/state-spaces/mamba/releases/download/v1.2.0.post1/mamba_ssm-1.2.0.post1+cu118torch2.3cxx11abiFALSE-cp310-cp310-linux_x86_64.whl
   python vmamba.py
 
+To train the model, we use main.py from VMamba directly; we use our customized configuration to load the model:
+  ```bash
+  torchrun --master_port 12006 --nproc_per_node=1 main.py \
+    --cfg configs/vmamba_tiny_base_4dir.yaml \
+    --data-path /data/ILSVRC2012-20   --batch-size your_batch_size \
+    --output your/output/directory
 
 ### result summary
 
