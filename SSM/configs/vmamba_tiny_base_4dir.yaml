@@ -1,0 +1,30 @@
+MODEL:
+  TYPE: vssm
+  NAME: vssm_tiny_base_4dir
+  NUM_CLASSES: 20
+  DROP_PATH_RATE: 0.2
+  VSSM:
+    EMBED_DIM: 96
+    DEPTHS: [2, 2, 8, 2]
+    SSM_D_STATE: 1
+    SSM_DT_RANK: "auto"
+    SSM_RATIO: 1.0
+    SSM_CONV: 3
+    SSM_CONV_BIAS: false
+    SSM_FORWARDTYPE: "v2"
+    MLP_RATIO: 4.0
+    DOWNSAMPLE: "v3"
+    PATCHEMBED: "v2"
+    NORM_LAYER: "ln"
+TRAIN:
+  EPOCHS: 30
+  BASE_LR: 5e-4
+  WARMUP_EPOCHS: 3
+  WEIGHT_DECAY: 0.01
+DATA:
+  IMG_SIZE: 224
+AUG:
+  MIXUP: 0.2
+  CUTMIX: 0.2
+  # (light aug only for small data)
+SEED: 42

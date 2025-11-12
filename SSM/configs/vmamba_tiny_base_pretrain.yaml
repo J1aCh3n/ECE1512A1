@@ -1,0 +1,31 @@
+MODEL:
+  TYPE: vssm
+  NAME: vssm_tiny_base_pretrain
+  NUM_CLASSES: 20
+  DROP_PATH_RATE: 0.2
+  PRETRAINED: "/home/jiachen/1512/experiments/vssm_tiny_pretrain.pth"
+  VSSM:
+    EMBED_DIM: 96
+    DEPTHS: [2, 2, 8, 2]
+    SSM_D_STATE: 1
+    SSM_DT_RANK: "auto"
+    SSM_RATIO: 1.0
+    SSM_CONV: 3
+    SSM_CONV_BIAS: false
+    SSM_FORWARDTYPE: "v05_noz"
+    MLP_RATIO: 4.0
+    DOWNSAMPLE: "v3"
+    PATCHEMBED: "v2"
+    NORM_LAYER: "ln2d"
+TRAIN:
+  EPOCHS: 10
+  BASE_LR: 5e-4
+  WARMUP_EPOCHS: 0
+  WEIGHT_DECAY: 0.01
+DATA:
+  IMG_SIZE: 224
+AUG:
+  MIXUP: 0.2
+  CUTMIX: 0.2
+  # (light aug only for small data)
+SEED: 42
