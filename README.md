@@ -2,20 +2,20 @@
 Yutian Mei yt.mei@mail.utoronto.ca
 Jiachen Rao jc.rao@mail.utoronto.ca
 
-# VMamba (SS2D) – Lightweight Experiments on ImageNet (val-only)
+## VMamba (SS2D) – Lightweight Experiments on ImageNet (val-only)
 
-This repo accompanies our course paper on extending **Mamba** to vision via **VMamba (SS2D)** and (theoretically) **Vim**. We focus on **accuracy/efficiency** under tight compute by training small VMamba variants on a **reduced ImageNet (ILSVRC2012) validation set**.
+This part accompanies our course paper on extending **Mamba** to vision via **VMamba (SS2D)** and (theoretically) **Vim**. We focus on **accuracy/efficiency** under tight compute by training small VMamba variants on a **reduced ImageNet (ILSVRC2012) validation set**.
 
 ---
 
-## What’s inside
+### What’s inside
 - **Paper outline**: Motivation, related work, how Mamba is extended by VMamba (SS2D) and Vim (bi-scan + pos. enc.), plus proposed experimental setups.
 - **Experiments (run)**: VMamba **4-dir SS2D** vs **2-dir** ablation on ImageNet-val-only (20 classes).  
 - **Experiments (theory-only)**: Vim variants and ablations (no runs due to compute).
 
 ---
 
-## Dataset protocol (small & reproducible)
+### Dataset protocol (small & reproducible)
 - Source: **ImageNet (ILSVRC2012) validation** set only.  
 - Split: **80% train / 20% val** (within val).  
 - Class reduction: **1,000 → 20 classes** (subset) to cut compute.  
@@ -25,7 +25,7 @@ This repo accompanies our course paper on extending **Mamba** to vision via **VM
 
 ---
 
-## Models
+### Models
 https://drive.google.com/drive/folders/1Btr66YbMwRaDLI21aIcszdBz0Hg2MoQE?usp=sharing
 - **From scratch**: VMamba-Tiny **4-dir SS2D** and **2-dir** ablation.
 - **Fine-tune**: Pretrained backbone **with stripped head**, resized inputs.
