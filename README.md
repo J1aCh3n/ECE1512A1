@@ -48,19 +48,19 @@ https://drive.google.com/drive/folders/1Btr66YbMwRaDLI21aIcszdBz0Hg2MoQE?usp=sha
   
 To train the model, we use main.py from VMamba directly; we use our customized configuration to load the model:
   ```bash
-  torchrun --master_port 12006 --nproc_per_node=1 main.py \
+  torchrun main.py \
     --cfg configs/vmamba_tiny_base_4dir.yaml \
     --data-path /data/ILSVRC2012-20   --batch-size your_batch_size \
     --output your/output/directory
   ```
 
-### result summary
+### Result summary
 
 | Model                 | Dirs | ImgSize | Top-1 | Top-5 | img/s |
 | --------------------- | :--: | :-----: | ----: | ----: | ----: |
 | VMamba-Tiny (scratch) |   4  |   224  |  27.00 |  64.50 |  158.5 |
 | VMamba-Tiny (scratch) |   2  |   224  |  27.00 |  64.50 |  160.3 |
-| VMamba-Tiny (ft, pre) |   4  |   224  |  99.50 |  99.50 |  169.5 |
+| VMamba-Tiny (ft, pre) |   4  |   224  |  94.00 |  99.50 |  169.5 |
 | VMamba-Tiny (ft, pre) |   4  |   128  |  92.50 |  97.50 |  338.3 |
 | VMamba-Tiny (ft, pre) |   4  |    64  |  74.00 |  95.00 |  381.6 |
 
